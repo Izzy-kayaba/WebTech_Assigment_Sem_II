@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bumble Anniversary Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 40px;
+            background-color: rgb(136, 157, 175);
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        @keyframes confetti {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff0;
+            animation: confetti 3s infinite linear;
+            opacity: 0.8;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .details {
+            font-size: 18px;
+        }
+
+        .card-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Section displaying an image of Mr. and Mrs. Bumble -->
+        <div class="card-section">
+            <img src="/married-couple.jpg" alt="Mr. and Mrs. Bumble">
+        </div>
+
+        <!-- Section displaying a thank you message and the RSVP details provided by the user -->
+        <div class="card-section">
+            <h2>Thank You for Your RSVP!</h2>
+
+            <!-- Container holding all the details filled out in the RSVP form -->
+            <div class="details">
+                <!-- Displays the user's full name -->
+                <p>Full Name: <span id="fullname"></span></p>
+                <!-- Displays the user's phone number -->
+                <p>Phone Number: <span id="telephone"></span></p>
+                <!-- Displays the user's email address -->
+                <p>Email: <span id="email"></span></p>
+                <!-- Displays the number of attendees -->
+                <p>Number of Attendees: <span id="attendees"></span></p>
+                <!-- Displays the user's arrival time -->
+                <p>Arrival Time: <span id="arrival"></span></p>
+                <!-- Displays the user's menu preference -->
+                <p>Menu Preference: <span id="diet"></span></p>
+                <!-- Displays the user's selected table option -->
+                <p>Table Option: <span id="table"></span></p>
+            </div>
+        </div>
+        <!-- Container for displaying confetti effects after the form submission -->
+        <div id="confettiContainer"></div>
+    </div>
+    <script>
+        // Retrieve and display RSVP details stored in localStorage
+        document.getElementById('fullname').textContent = localStorage.getItem('fullname'); // Full Name
+        document.getElementById('telephone').textContent = localStorage.getItem('telephone'); // Phone Number
+        document.getElementById('email').textContent = localStorage.getItem('email'); // Email Address
+        document.getElementById('attendees').textContent = localStorage.getItem('attendees'); // Number of Attendees
+        document.getElementById('arrival').textContent = localStorage.getItem('arrival'); // Arrival Time
+        document.getElementById('diet').textContent = localStorage.getItem('diet'); // Menu Preference
+        document.getElementById('table').textContent = localStorage.getItem('table'); // Table Option
+
+        // Function to create and display a confetti element on the page
+        function createConfetti() {
+            const confettiContainer = document.getElementById('confettiContainer'); // Select the confetti container element
+            const confetti = document.createElement('div'); // Create a new div element for confetti
+            confetti.classList.add('confetti'); // Add a 'confetti' class to the new div for styling
+            // Set random positions and appearance for the confetti
+            confetti.style.top = Math.random() * 100 + 'vh'; // Set random vertical position
+            confetti.style.left = Math.random() * 100 + 'vw'; // Set random horizontal position
+            confetti.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16); // Set a random background color
+            confetti.style.animationDuration = Math.random() * 3 + 2 + 's'; // Set random animation duration
+
+            // Append the confetti element to the confetti container
+            confettiContainer.appendChild(confetti);
+
+            // Remove the confetti element from the DOM after 3 seconds to avoid cluttering
+            setTimeout(() => {
+                confetti.remove();
+            }, 3000);
+        }
+        // Continuously create confetti every 100 milliseconds
+        setInterval(createConfetti, 100);
+    </script>
+
+</body>
+
+</html>

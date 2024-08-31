@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bumble Anniversary RSVP</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: rgb(136, 157, 175);
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: rgb(136, 157, 175);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: rgb(100, 140, 155);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Bumble's Family 25th Anniversary Invitation</h2>
+        <form id="rsvpForm">
+            <label for="fullname">Full Name</label>
+            <input type="text" id="fullname" name="fullname" required>
+            <label for="telephone">Phone Number</label>
+            <input type="tel" id="telephone" name="telephone" required>
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            <label for="attendees">Number of Attendees</label>
+            <input type="number" id="attendees" name="attendees" min="1" max="10" required>
+            <label for="arrival">Arrival Time</label>
+            <input type="time" id="arrival" name="arrival" required>
+            <label for="diet">Menu Preference:</label>
+
+            <select name="diet" id="diet" required>
+                <option value="vegan">vegan</option>
+                <option value="meat">meat</option>
+                <option value="any">any</option>
+            </select>
+
+            <label for="table">Select Table Option:</label>
+            <select name="table" id="table" required>
+                <option value="table 1">table 1</option>
+                <option value="table 2">table 2</option>
+                <option value="table 3">table 3</option>
+                <option value="table 4">table 4</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('rsvpForm').addEventListener('submit', function (e) {
+            // Prevent the default form submission behavior
+            e.preventDefault();
+            // Retrieve the values from the form fields
+            const fullname = document.getElementById('fullname').value;
+            const telephone = document.getElementById('telephone').value;
+            const email = document.getElementById('email').value;
+            const attendees = document.getElementById('attendees').value;
+            const arrival = document.getElementById('arrival').value;
+            const diet = document.getElementById('diet').value;
+            const table = document.getElementById('table').value;
+
+            // Check if any of the fields are empty
+            if (fullname === '' || telephone === '' || email === '' || attendees === '' || arrival === "" || diet === "" || table === "") {
+                // Display an error message if any field is empty
+                errorDiv.textContent = 'Please fill in all fields.';
+                return; // Stop further execution if validation fails
+            }
+            // Store the form data in localStorage
+            localStorage.setItem('fullname', fullname);
+            localStorage.setItem('telephone', telephone);
+            localStorage.setItem('email', email);
+            localStorage.setItem('attendees', attendees);
+            localStorage.setItem('arrival', arrival);
+            localStorage.setItem('diet', diet);
+            localStorage.setItem('table', table);
+            // Redirect to the details page after successful submission
+            window.location.href = 'details.html';
+        });
+
+    </script>
+</body>
+
+</html>

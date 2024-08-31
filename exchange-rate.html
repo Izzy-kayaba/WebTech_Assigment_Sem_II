@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exchange Rate Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        table {
+            width: 100%;
+            margin-bottom: 20px;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+        }
+
+        th,
+        td {
+            padding: 12px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #1e64c6;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #0c2a75;
+        }
+
+        .result {
+            text-align: center;
+            font-size: 18px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Exchange Rate Calculator</h1>
+    <div class="container">
+        <p>Please Enter The Amount you want to Exchange in ZAR:</p>
+        <input type="number" id="amount" placeholder="Please Enter amount in ZAR">
+        <table>
+            <thead>
+                <tr>
+                    <th>Currency</th>
+                    <th>Today's Exchange Rate</th>
+                    <th>Amount You will Recieve in ZAR Currency</th>
+                </tr>
+            </thead>
+            <tbody id="rateTable">
+                <!-- Rows will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+        <div class="result" id="result"></div>
+        <button onclick="convert()">Convert Currency To ZAR</button>
+    </div>
+
+    <script>
+        const exchangeRates = [{ currency: 'USD', rate: 18.24 }, { currency: 'EUR', rate: 19.89 }, { currency: 'GBP', rate: 23.60 },
+        { currency: 'JPY', rate: 0.12 }, { currency: 'AUD', rate: 12.22 }, { currency: 'CAD', rate: 13.31 },
+        { currency: 'CHF', rate: 20.56 }, { currency: 'CNY', rate: 2.51 }, { currency: 'INR', rate: 0.22 }, { currency: 'BRL', rate: 3.37 }];
+        function convert() {
+            // Get the input amount from the user and convert it to a floating-point number
+            const amount = parseFloat(document.getElementById('amount').value);
+            // Select the table body where the conversion results will be displayed
+            const tableBody = document.getElementById('rateTable');
+            // Clear any existing content in the table body
+            tableBody.innerHTML = '';
+            if (isNaN(amount) || amount <= 0) {
+                // If not, display an error message and stop further execution
+                document.getElementById('result').innerText = 'Please enter a valid amount in ZAR.';
+                return;
+            }
+            exchangeRates.forEach(rate => {
+                // Calculate the converted amount for each currency
+                const convertedAmount = (amount * rate.rate).toFixed(2);
+                // Create a new row of data with the currency, rate, and converted amount
+                const row = `
+            <tr>
+                <td>${rate.currency}</td>
+                <td>${rate.rate}</td>
+                <td>${convertedAmount}</td>
+            </tr>
+        `;
+                // Append the newly created row to the table body
+                tableBody.innerHTML += row;
+            });
+        }
+    </script>
+</body>
+
+</html>
